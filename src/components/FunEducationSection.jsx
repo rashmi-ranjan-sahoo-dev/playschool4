@@ -1,9 +1,63 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight, Sparkles, Star, Zap, GraduationCap, Heart, Rocket } from 'lucide-react';
 import { brandConfig } from '../config/brandConfig';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function FunEducationSection({ onOpenTrialModal }) {
   const [activeCard, setActiveCard] = useState(0);
+  const sectionRef = useRef(null);
+  const headerRef = useRef(null);
+  const cardsRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // 1. Header slow reveal
+      if (headerRef.current) {
+        gsap.fromTo(
+          headerRef.current.children,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.0,
+            stagger: 0.12,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+      }
+
+      // 2. 3 Feature cards slow wave entrance
+      if (cardsRef.current) {
+        gsap.fromTo(
+          cardsRef.current.children,
+          { opacity: 0, y: 45, scale: 0.94 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1.15,
+            stagger: 0.16,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: cardsRef.current,
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const cards = [
     {
@@ -45,7 +99,7 @@ export default function FunEducationSection({ onOpenTrialModal }) {
   ];
 
   return (
-    <section className="relative py-20 md:py-28 bg-[#171E45] text-white overflow-hidden">
+    <section ref={sectionRef} className="relative pt-8 md:pt-10 pb-10 md:pb-12 bg-[#171E45] text-white overflow-hidden">
       
       {/* Decorative Floating Stickers (Matching Reference Template's 3D Star & Thunder) */}
       <div className="absolute top-10 left-8 md:left-16 text-amber-400 opacity-80 pointer-events-none animate-float hidden sm:block">
@@ -67,23 +121,19 @@ export default function FunEducationSection({ onOpenTrialModal }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Heading */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center space-x-2 bg-white/10 border border-white/20 text-[#FAB823] font-fredoka font-bold text-xs md:text-sm px-4 py-1.5 rounded-full mb-4 backdrop-blur-xs">
+        <div ref={headerRef} className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+          <div className="inline-flex items-center space-x-2 bg-white/10 border border-white/20 text-[#FAB823] font-fredoka font-bold text-xs md:text-sm px-4 py-1.5 rounded-full mb-3 backdrop-blur-xs">
             <Sparkles className="w-4 h-4" />
             <span>Interactive Childhood Atmosphere</span>
           </div>
 
-          <h2 className="font-rowdies text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
+          <h2 className="font-rowdies text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
             Committed To Fun-Filled Early Education
           </h2>
-
-          <p className="mt-4 text-gray-300 text-sm sm:text-base leading-relaxed">
-            Every child blooms at their own pace. At {brandConfig.brandName}, our daily routines ignite wonder, build empathy, and instill lasting confidence.
-          </p>
         </div>
 
-        {/* 3 Interactive Feature Cards (A for Apple Section 10 Cards) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* 3 Interactive Feature Cards */}
+        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {cards.map((card, idx) => {
             const Icon = card.icon;
             const isHovered = activeCard === idx;
@@ -92,7 +142,7 @@ export default function FunEducationSection({ onOpenTrialModal }) {
               <div
                 key={card.id}
                 onMouseEnter={() => setActiveCard(idx)}
-                className={`relative bg-[#1f295c] rounded-3xl p-8 border-2 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-2 cursor-pointer ${
+                className={`relative bg-[#1f295c] rounded-3xl p-6 sm:p-7 md:p-8 border-2 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-2 cursor-pointer ${
                   isHovered ? `${card.borderColor} shadow-[6px_6px_0px_#FC800A]` : 'border-white/10 hover:border-white/40'
                 }`}
               >

@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { X, Utensils, Sparkles, CheckCircle2, ShieldCheck, Heart } from 'lucide-react';
 import { brandConfig } from '../config/brandConfig';
 
 export default function WeeklyMenuModal({ isOpen, onClose }) {
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-fadeIn">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-fadeIn"
+      onClick={onClose}
+    >
       <div 
         className="bg-[#FCF7EE] rounded-3xl border-4 border-[#171E45] shadow-2xl max-w-2xl w-full overflow-hidden relative card-playful-shadow max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}

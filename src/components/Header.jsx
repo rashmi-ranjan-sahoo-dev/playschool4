@@ -40,7 +40,7 @@ export default function Header({ onOpenTrialModal }) {
             // Scroll DOWN past 70px -> HIDE header
             if (diff > 8 && currentScrollY > 70) {
               setIsVisible(false);
-            } 
+            }
             // Scroll UP or near top -> SHOW header
             else if (diff < -8 || currentScrollY <= 30) {
               setIsVisible(true);
@@ -124,28 +124,26 @@ export default function Header({ onOpenTrialModal }) {
 
   return (
     <>
-      <header 
-        className={`fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          isVisible ? 'translate-y-0' : '-translate-y-full shadow-none'
-        } ${
-          isScrolled 
-            ? 'py-2 sm:py-2.5 shadow-md shadow-black/5 border-b border-orange-100/90' 
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] ${isVisible ? 'translate-y-0' : '-translate-y-full shadow-none'
+          } ${isScrolled
+            ? 'py-2 sm:py-2.5 shadow-md shadow-black/5 border-b border-orange-100/90'
             : 'py-3 sm:py-4 border-b border-gray-100'
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-2">
-            
+
             {/* ================= Logo Section with Playful Mascot & Animation ================= */}
-            <a 
-              href="#hero" 
+            <a
+              href="#hero"
               onClick={(e) => handleNavClick(e, { name: 'Home', href: '#hero' })}
               className="flex items-center space-x-2 sm:space-x-3 group select-none shrink-0"
             >
               {/* Colorful smiling sun mascot with children rays */}
               <div className="relative w-9 h-9 sm:w-11 sm:h-11 md:w-12 md:h-12 flex items-center justify-center shrink-0">
-                <svg 
-                  className="w-full h-full transform group-hover:rotate-45 group-hover:scale-110 transition-transform duration-500 ease-out" 
+                <svg
+                  className="w-full h-full transform group-hover:rotate-45 group-hover:scale-110 transition-transform duration-500 ease-out"
                   viewBox="0 0 100 100"
                 >
                   {/* Sun rays in playful multiple colors */}
@@ -193,23 +191,21 @@ export default function Header({ onOpenTrialModal }) {
                     onClick={(e) => handleNavClick(e, link)}
                     onMouseEnter={() => setHoveredIndex(idx)}
                     onMouseLeave={() => setHoveredIndex(null)}
-                    className={`relative py-2 text-[14.5px] xl:text-[15.5px] font-bold tracking-wide transition-colors duration-250 group cursor-pointer ${
-                      isActive 
-                        ? 'text-[#FC800A]' 
-                        : 'text-[#171E45] hover:text-[#FC800A]'
-                    }`}
+                    className={`relative py-2 text-[14.5px] xl:text-[15.5px] font-bold tracking-wide transition-colors duration-250 group cursor-pointer ${isActive
+                      ? 'text-[#FC800A]'
+                      : 'text-[#171E45] hover:text-[#FC800A]'
+                      }`}
                   >
                     <span className="inline-flex items-center space-x-1">
                       <span>{link.name}</span>
                       {link.hasHeart && (
-                        <span 
-                          className={`text-xs ml-0.5 transition-all duration-300 inline-block ${
-                            isActive
-                              ? 'text-[#FC800A] scale-125 font-bold'
-                              : isHovered 
-                              ? 'scale-125 text-[#FF723A] rotate-12' 
+                        <span
+                          className={`text-xs ml-0.5 transition-all duration-300 inline-block ${isActive
+                            ? 'text-[#FC800A] scale-125 font-bold'
+                            : isHovered
+                              ? 'scale-125 text-[#FF723A] rotate-12'
                               : 'text-gray-300'
-                          }`}
+                            }`}
                         >
                           ♡
                         </span>
@@ -217,14 +213,13 @@ export default function Header({ onOpenTrialModal }) {
                     </span>
 
                     {/* Animated Bottom Indicator Line */}
-                    <span 
-                      className={`absolute bottom-0 left-0 h-0.5 rounded-full transition-all duration-300 ease-out ${
-                        isActive 
-                          ? 'w-full bg-[#FC800A] opacity-100 shadow-xs' 
-                          : isHovered 
-                          ? 'w-full bg-orange-300 opacity-80' 
+                    <span
+                      className={`absolute bottom-0 left-0 h-0.5 rounded-full transition-all duration-300 ease-out ${isActive
+                        ? 'w-full bg-[#FC800A] opacity-100 shadow-xs'
+                        : isHovered
+                          ? 'w-full bg-orange-300 opacity-80'
                           : 'w-0 opacity-0'
-                      }`}
+                        }`}
                     />
                   </a>
                 );
@@ -248,38 +243,34 @@ export default function Header({ onOpenTrialModal }) {
               <div className="flex items-center lg:hidden">
                 <button
                   onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  className={`w-10 h-10 sm:w-11 sm:h-11 rounded-2xl flex items-center justify-center focus:outline-none transition-all duration-300 cursor-pointer ${
-                    mobileMenuOpen 
-                      ? 'bg-[#FC800A] text-white shadow-md shadow-orange-500/25 rotate-90 scale-95' 
-                      : 'bg-orange-50/90 hover:bg-orange-100 text-[#171E45] hover:scale-105 active:scale-95'
-                  }`}
+                  className={`w-10 h-10 sm:w-11 sm:h-11 rounded-2xl flex items-center justify-center focus:outline-none transition-all duration-300 cursor-pointer ${mobileMenuOpen
+                    ? 'bg-[#FC800A] text-white shadow-md shadow-orange-500/25 rotate-90 scale-95'
+                    : 'bg-orange-50/90 hover:bg-orange-100 text-[#171E45] hover:scale-105 active:scale-95'
+                    }`}
                   aria-label="Toggle navigation menu"
                   aria-expanded={mobileMenuOpen}
                 >
                   <div className="w-5 h-4 flex flex-col justify-between items-center relative pointer-events-none">
                     {/* Top bar morphs to 45 deg line */}
-                    <span 
-                      className={`h-0.5 w-5 rounded-full transition-all duration-300 ease-in-out origin-center ${
-                        mobileMenuOpen 
-                          ? 'bg-white rotate-45 translate-y-[7px]' 
-                          : 'bg-[#171E45]'
-                      }`}
+                    <span
+                      className={`h-0.5 w-5 rounded-full transition-all duration-300 ease-in-out origin-center ${mobileMenuOpen
+                        ? 'bg-white rotate-45 translate-y-[7px]'
+                        : 'bg-[#171E45]'
+                        }`}
                     />
                     {/* Middle bar fades & shrinks to 0 */}
-                    <span 
-                      className={`h-0.5 w-5 rounded-full transition-all duration-200 ease-in-out ${
-                        mobileMenuOpen 
-                          ? 'opacity-0 scale-0' 
-                          : 'bg-[#171E45] opacity-100'
-                      }`}
+                    <span
+                      className={`h-0.5 w-5 rounded-full transition-all duration-200 ease-in-out ${mobileMenuOpen
+                        ? 'opacity-0 scale-0'
+                        : 'bg-[#171E45] opacity-100'
+                        }`}
                     />
                     {/* Bottom bar morphs to -45 deg line */}
-                    <span 
-                      className={`h-0.5 w-5 rounded-full transition-all duration-300 ease-in-out origin-center ${
-                        mobileMenuOpen 
-                          ? 'bg-white -rotate-45 -translate-y-[7px]' 
-                          : 'bg-[#171E45]'
-                      }`}
+                    <span
+                      className={`h-0.5 w-5 rounded-full transition-all duration-300 ease-in-out origin-center ${mobileMenuOpen
+                        ? 'bg-white -rotate-45 -translate-y-[7px]'
+                        : 'bg-[#171E45]'
+                        }`}
                     />
                   </div>
                 </button>
@@ -290,12 +281,11 @@ export default function Header({ onOpenTrialModal }) {
         </div>
 
         {/* ================= Responsive Mobile Drawer with Smooth Open & Close Animations ================= */}
-        <div 
-          className={`lg:hidden overflow-hidden transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            mobileMenuOpen 
-              ? 'max-h-[520px] opacity-100 translate-y-0 border-t border-orange-100/90 shadow-2xl pointer-events-auto' 
-              : 'max-h-0 opacity-0 -translate-y-2 pointer-events-none'
-          } bg-white/98 backdrop-blur-xl`}
+        <div
+          className={`lg:hidden overflow-hidden transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] ${mobileMenuOpen
+            ? 'max-h-[520px] opacity-100 translate-y-0 border-t border-orange-100/90 shadow-2xl pointer-events-auto'
+            : 'max-h-0 opacity-0 -translate-y-2 pointer-events-none'
+            } bg-white/98 backdrop-blur-xl`}
         >
           <div className="px-4 sm:px-6 pt-3 pb-6 space-y-2">
             {navLinks.map((link, idx) => {
@@ -309,13 +299,11 @@ export default function Header({ onOpenTrialModal }) {
                   style={{
                     transitionDelay: mobileMenuOpen ? `${idx * 40}ms` : '0ms'
                   }}
-                  className={`flex items-center justify-between px-4 py-3 rounded-2xl text-base font-bold transition-all duration-300 ${
-                    mobileMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0'
-                  } ${
-                    isActive 
-                      ? 'bg-orange-50 text-[#FC800A] shadow-xs pl-5 font-extrabold border-l-4 border-[#FC800A]' 
+                  className={`flex items-center justify-between px-4 py-3 rounded-2xl text-base font-bold transition-all duration-300 ${mobileMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0'
+                    } ${isActive
+                      ? 'bg-orange-50 text-[#FC800A] shadow-xs pl-5 font-extrabold border-l-4 border-[#FC800A]'
                       : 'text-[#171E45] hover:bg-orange-50/50 hover:text-[#FC800A]'
-                  }`}
+                    }`}
                 >
                   <span className="flex items-center space-x-2">
                     <span>{link.name}</span>
@@ -333,11 +321,10 @@ export default function Header({ onOpenTrialModal }) {
             })}
 
             {/* Mobile Drawer Admissions CTA */}
-            <div 
+            <div
               style={{ transitionDelay: mobileMenuOpen ? `${navLinks.length * 40}ms` : '0ms' }}
-              className={`pt-3 border-t border-gray-100 transition-all duration-300 ${
-                mobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
-              }`}
+              className={`pt-3 border-t border-gray-100 transition-all duration-300 ${mobileMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
+                }`}
             >
               <button
                 onClick={() => {
@@ -358,11 +345,10 @@ export default function Header({ onOpenTrialModal }) {
       <div className="h-[64px] sm:h-[76px]" aria-hidden="true" />
 
       {/* Backdrop overlay for mobile menu tap-outside to close */}
-      <div 
+      <div
         onClick={() => setMobileMenuOpen(false)}
-        className={`fixed inset-0 top-16 bg-black/25 backdrop-blur-xs z-40 transition-opacity duration-300 lg:hidden ${
-          mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
+        className={`fixed inset-0 top-16 bg-black/25 backdrop-blur-xs z-40 transition-opacity duration-300 lg:hidden ${mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+          }`}
       />
     </>
   );

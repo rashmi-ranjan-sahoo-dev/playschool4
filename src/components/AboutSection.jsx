@@ -1,11 +1,85 @@
-import React from 'react';
-import { 
-  ArrowRight, Mic, Video, PhoneOff 
-} from 'lucide-react';
+import React, { useEffect, useRef } from 'react';
+import { ArrowRight } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { brandConfig } from '../config/brandConfig';
 import PencilSticker from './PencilSticker';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function AboutSection({ onOpenVideoModal, onOpenMenuModal, onOpenTrialModal }) {
+  const sectionRef = useRef(null);
+  const headerRef = useRef(null);
+  const highlightsRef = useRef(null);
+  const collageRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // 1. Header & narrative smooth slow entrance
+      if (headerRef.current) {
+        gsap.fromTo(
+          headerRef.current.children,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.0,
+            stagger: 0.12,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+      }
+
+      // 2. 6 Feature Icon Cards wave entrance
+      if (highlightsRef.current) {
+        gsap.fromTo(
+          highlightsRef.current.children,
+          { opacity: 0, y: 25 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.0,
+            stagger: 0.1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: highlightsRef.current,
+              start: 'top 88%',
+              once: true
+            }
+          }
+        );
+      }
+
+      // 3. 4 Collage Tiles slow floating entrance
+      if (collageRef.current) {
+        const tiles = collageRef.current.querySelectorAll('.collage-tile');
+        gsap.fromTo(
+          tiles,
+          { opacity: 0, y: 40, scale: 0.94 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1.2,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: collageRef.current,
+              start: 'top 85%',
+              once: true
+            }
+          }
+        );
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
   // 6 Highlights matching the reference screenshot in 2 columns x 3 rows
   const highlights = [
     {
@@ -87,7 +161,7 @@ export default function AboutSection({ onOpenVideoModal, onOpenMenuModal, onOpen
   ];
 
   return (
-    <section id="about" className="py-16 md:py-24 bg-[#FCF8EE] relative overflow-hidden">
+    <section id="about" ref={sectionRef} className="pt-6 md:pt-8 pb-8 sm:pb-10 md:pb-12 bg-[#FCF8EE] relative overflow-hidden">
       
       {/* Decorative background subtle elements */}
       <div className="absolute top-10 left-6 text-2xl opacity-20 select-none pointer-events-none">⭐</div>
@@ -95,38 +169,40 @@ export default function AboutSection({ onOpenVideoModal, onOpenMenuModal, onOpen
       <div className="absolute bottom-8 left-12 text-2xl opacity-20 select-none pointer-events-none">🌸</div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           
           {/* ================= LEFT COLUMN: Headline, Narrative & 6 Icons ================= */}
           <div className="lg:col-span-6 flex flex-col justify-center">
             
-            {/* Subtitle */}
-            <span className="text-[#FC800A] font-rowdies font-bold text-xs sm:text-sm tracking-[0.2em] uppercase mb-2 inline-block">
-              ABOUT US
-            </span>
+            <div ref={headerRef}>
+              {/* Subtitle */}
+              <span className="text-[#FC800A] font-rowdies font-bold text-xs sm:text-sm tracking-[0.2em] uppercase mb-2 inline-block">
+                ABOUT US
+              </span>
 
-            {/* Main Headline */}
-            <h2 className="font-rowdies text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#111827] leading-[1.18] tracking-tight mb-4">
-              Globally Recognized Interactive Preschool Education
-            </h2>
+              {/* Main Headline */}
+              <h2 className="font-rowdies text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-bold text-[#111827] leading-[1.18] tracking-tight mb-4">
+                Globally Recognized Interactive Preschool Education
+              </h2>
 
-            {/* Narrative Paragraph */}
-            <p className="text-gray-600 font-normal text-sm sm:text-base leading-relaxed mb-8 max-w-xl">
-              Rooted in rich Indian cultural values and accelerated by globally acclaimed early-childhood frameworks (Montessori & NEP 2020), {brandConfig.brandName} creates an inspiring second home. Through sensory exploration and joyful discovery, every child blossoms with natural curiosity and lifelong confidence.
-            </p>
+              {/* Narrative Paragraph */}
+              <p className="text-gray-600 font-normal text-xs sm:text-sm md:text-base leading-relaxed mb-6 sm:mb-8 max-w-xl">
+                Rooted in rich Indian cultural values and accelerated by globally acclaimed early-childhood frameworks (Montessori & NEP 2020), {brandConfig.brandName} creates an inspiring second home. Through sensory exploration and joyful discovery, every child blossoms with natural curiosity and lifelong confidence.
+              </p>
+            </div>
 
             {/* 6 Feature Icon Cards (2 Columns x 3 Rows) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5 sm:gap-y-6 mb-9">
+            <div ref={highlightsRef} className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 sm:gap-x-6 gap-y-4 sm:gap-y-6 mb-7 sm:mb-9">
               {highlights.map((item, i) => (
                 <div 
                   key={i} 
-                  className="flex items-center space-x-3.5 group cursor-pointer transition-transform duration-300 hover:translate-x-1"
+                  className="flex items-center space-x-3 group cursor-pointer transition-transform duration-300 hover:translate-x-1 min-w-0"
                 >
-                  <div className={`w-14 h-14 sm:w-15 sm:h-15 rounded-2xl flex items-center justify-center shrink-0 ${item.bgColor} shadow-sm group-hover:scale-105 group-hover:rotate-2 transition-all duration-300`}>
+                  <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center shrink-0 ${item.bgColor} shadow-sm group-hover:scale-105 group-hover:rotate-2 transition-all duration-300`}>
                     {item.icon}
                   </div>
-                  <div>
-                    <h4 className="font-rowdies text-[15px] sm:text-base font-bold text-[#111827] leading-tight group-hover:text-[#FC800A] transition-colors whitespace-pre-line">
+                  <div className="min-w-0">
+                    <h4 className="font-rowdies text-sm sm:text-[15px] font-bold text-[#111827] leading-tight group-hover:text-[#FC800A] transition-colors whitespace-pre-line">
                       {item.title}
                     </h4>
                   </div>
@@ -143,20 +219,19 @@ export default function AboutSection({ onOpenVideoModal, onOpenMenuModal, onOpen
                 <span>MORE ABOUT US</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
               </button>
-              
             </div>
 
           </div>
 
           {/* ================= RIGHT COLUMN: 4-Item Visual Collage with Dashed Borders & Sticker ================= */}
-          <div className="lg:col-span-6 relative w-full max-w-xl lg:max-w-none mx-auto mt-6 lg:mt-0 select-none">
+          <div ref={collageRef} className="lg:col-span-6 relative w-full max-w-xl lg:max-w-none mx-auto mt-6 lg:mt-0 select-none">
             
             {/* Top Collage Row (Tile 1: Oval Green + Tile 2: Teacher Video Golden) */}
-            <div className="flex items-center justify-between gap-3 sm:gap-4 mb-3 sm:mb-4">
+            <div className="flex items-center justify-between gap-2.5 sm:gap-4 mb-3 sm:mb-4">
               
               {/* Tile 1: Top-Left Vertical Oval Pill with Green Dashed Border */}
-              <div className="w-[39%] sm:w-[38%] p-1 sm:p-1.5 rounded-[90px] sm:rounded-[110px] border-2 border-dashed border-[#5AAD65] bg-transparent animate-slow-float shrink-0">
-                <div className="w-full h-44 sm:h-56 md:h-64 rounded-[86px] sm:rounded-[106px] overflow-hidden shadow-sm group">
+              <div className="collage-tile w-[38%] p-1 sm:p-1.5 rounded-[90px] sm:rounded-[110px] border-2 border-dashed border-[#5AAD65] bg-transparent animate-slow-float shrink-0">
+                <div className="w-full h-40 xs:h-44 sm:h-56 md:h-64 rounded-[86px] sm:rounded-[106px] overflow-hidden shadow-sm group">
                   <img 
                     src="/images/about/indian_preschool_oval.jpg" 
                     alt="Indian preschool children in interactive play" 
@@ -165,57 +240,25 @@ export default function AboutSection({ onOpenVideoModal, onOpenMenuModal, onOpen
                 </div>
               </div>
 
-              {/* Tile 2: Top-Right Teacher Video Call with Yellow/Golden Dashed Border */}
-              <div className="w-[58%] sm:w-[59%] p-1 sm:p-1.5 rounded-3xl border-2 border-dashed border-[#FAB823] bg-transparent animate-slow-float-delayed-1 relative shrink-0">
-                <div className="w-full h-44 sm:h-56 md:h-64 rounded-[22px] overflow-hidden shadow-sm relative group">
+              {/* Tile 2: Top-Right Educator with Yellow/Golden Dashed Border */}
+              <div className="collage-tile w-[58%] p-1 sm:p-1.5 rounded-3xl border-2 border-dashed border-[#FAB823] bg-transparent animate-slow-float-delayed-1 relative shrink-0">
+                <div className="w-full h-40 xs:h-44 sm:h-56 md:h-64 rounded-[22px] overflow-hidden shadow-sm group">
                   <img 
                     src="/images/about/indian_teacher_call.jpg" 
-                    alt="Indian preschool educator conducting interactive lesson" 
+                    alt="Indian preschool educator conducting interactive Montessori lesson" 
                     className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" 
                   />
-                  
-                  {/* Floating Video Call Controls Pill Overlay */}
-                  <div className="absolute bottom-2.5 sm:bottom-3 left-1/2 -translate-x-1/2 bg-black/60 backdrop-blur-md px-3 sm:px-4 py-1.5 rounded-full flex items-center space-x-2 sm:space-x-2.5 z-10 shadow-lg border border-white/10">
-                    <button 
-                      onClick={onOpenTrialModal} 
-                      className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#10B981] hover:bg-[#059669] text-white flex items-center justify-center text-xs font-bold transition-transform hover:scale-110 active:scale-95 cursor-pointer shadow"
-                      title="Join Live Classroom"
-                    >
-                      +
-                    </button>
-                    <button 
-                      onClick={onOpenVideoModal}
-                      className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition-transform hover:scale-110 active:scale-95 cursor-pointer"
-                      title="Audio"
-                    >
-                      <Mic className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white" />
-                    </button>
-                    <button 
-                      onClick={onOpenVideoModal}
-                      className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition-transform hover:scale-110 active:scale-95 cursor-pointer"
-                      title="Video"
-                    >
-                      <Video className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white" />
-                    </button>
-                    <button 
-                      onClick={onOpenVideoModal}
-                      className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#EF4444] hover:bg-[#DC2626] text-white flex items-center justify-center transition-transform hover:scale-110 active:scale-95 cursor-pointer shadow"
-                      title="Virtual Campus Tour"
-                    >
-                      <PhoneOff className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white" />
-                    </button>
-                  </div>
                 </div>
               </div>
 
             </div>
 
             {/* Bottom Collage Row (Tile 3: Student Desk Coral + Tile 4: Boy Yellow Amber) */}
-            <div className="flex items-center justify-between gap-3 sm:gap-4 relative">
+            <div className="flex items-center justify-between gap-2.5 sm:gap-4 relative">
               
               {/* Tile 3: Bottom-Left Study Desk with Coral Orange Dashed Border */}
-              <div className="w-[59%] sm:w-[62%] p-1 sm:p-1.5 rounded-3xl border-2 border-dashed border-[#FC800A] bg-transparent animate-slow-float-delayed-2 shrink-0">
-                <div className="w-full h-48 sm:h-60 md:h-72 rounded-[22px] overflow-hidden shadow-sm group">
+              <div className="collage-tile w-[58%] p-1 sm:p-1.5 rounded-3xl border-2 border-dashed border-[#FC800A] bg-transparent animate-slow-float-delayed-2 shrink-0">
+                <div className="w-full h-44 xs:h-48 sm:h-60 md:h-72 rounded-[22px] overflow-hidden shadow-sm group">
                   <img 
                     src="/images/about/indian_child_desk.jpg" 
                     alt="Indian preschool child studying at interactive workstation" 
@@ -225,8 +268,8 @@ export default function AboutSection({ onOpenVideoModal, onOpenMenuModal, onOpen
               </div>
 
               {/* Tile 4: Bottom-Right Yellow Card with Amber Dashed Border */}
-              <div className="w-[38%] sm:w-[35%] p-1 sm:p-1.5 rounded-3xl border-2 border-dashed border-[#E57A28] bg-transparent animate-slow-float-delayed-3 relative shrink-0">
-                <div className="w-full h-48 sm:h-60 md:h-72 rounded-[22px] overflow-hidden shadow-sm bg-[#FAB823] flex items-center justify-center group">
+              <div className="collage-tile w-[38%] p-1 sm:p-1.5 rounded-3xl border-2 border-dashed border-[#E57A28] bg-transparent animate-slow-float-delayed-3 relative shrink-0">
+                <div className="w-full h-44 xs:h-48 sm:h-60 md:h-72 rounded-[22px] overflow-hidden shadow-sm bg-[#FAB823] flex items-center justify-center group">
                   <img 
                     src="/images/about/indian_boy_yellow.jpg" 
                     alt="Indian student reading on modern study chair" 

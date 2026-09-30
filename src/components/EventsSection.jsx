@@ -4,7 +4,7 @@ import { brandConfig } from '../config/brandConfig';
 
 export default function EventsSection({ onOpenTrialModal }) {
   return (
-    <section id="events" className="py-16 md:py-24 bg-[#FCF7EE] relative overflow-hidden border-t border-orange-200/50">
+    <section id="events" className="pt-6 md:pt-8 pb-16 md:pb-24 bg-[#FCF7EE] relative overflow-hidden border-t border-orange-200/50">
       
       {/* Background doodle */}
       <div className="absolute top-10 left-8 text-4xl opacity-30 select-none pointer-events-none">🎪</div>

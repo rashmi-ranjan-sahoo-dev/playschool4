@@ -24,7 +24,7 @@ export default function PromoCtaBanner({ onOpenTrialModal }) {
   };
 
   return (
-    <section className="py-16 md:py-20 bg-gradient-to-r from-[#FC800A] via-[#f76e0a] to-[#FAB823] text-white relative overflow-hidden">
+    <section className="pt-6 md:pt-8 pb-16 md:pb-20 bg-gradient-to-r from-[#FC800A] via-[#f76e0a] to-[#FAB823] text-white relative overflow-hidden">
       
       {/* Decorative floating shapes */}
       <div className="absolute top-4 left-6 text-4xl animate-bounce opacity-80 pointer-events-none">

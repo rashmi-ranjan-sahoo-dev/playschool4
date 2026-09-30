@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { X, Play, Sparkles } from 'lucide-react';
 import { brandConfig } from '../config/brandConfig';
 
 export default function VideoModal({ isOpen, onClose }) {
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-fadeIn">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-fadeIn"
+      onClick={onClose}
+    >
       <div 
         className="bg-[#171E45] rounded-3xl border-4 border-[#FC800A] shadow-2xl max-w-3xl w-full overflow-hidden relative card-playful-shadow"
         onClick={(e) => e.stopPropagation()}

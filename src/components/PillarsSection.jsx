@@ -11,7 +11,7 @@ export default function PillarsSection({ onOpenTrialModal }) {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-[#FCF7EE] relative overflow-hidden">
+    <section className="pt-6 md:pt-8 pb-16 md:pb-24 bg-[#FCF7EE] relative overflow-hidden">
       
       {/* Background doodles */}
       <div className="absolute top-10 right-4 text-4xl opacity-40 select-none pointer-events-none">🎨</div>

@@ -7,10 +7,8 @@ import FunEducationSection from './components/FunEducationSection';
 import ProgramsSection from './components/ProgramsSection';
 import HowWeWorkSection from './components/HowWeWorkSection';
 import AdmissionSteps from './components/AdmissionSteps';
-import EventsSection from './components/EventsSection';
 import CampusGallery from './components/CampusGallery';
 import TestimonialsSection from './components/TestimonialsSection';
-import PromoCtaBanner from './components/PromoCtaBanner';
 import Footer from './components/Footer';
 import TrialModal from './components/TrialModal';
 import WeeklyMenuModal from './components/WeeklyMenuModal';
@@ -26,21 +24,21 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#FCF7EE] text-[#171E45] flex flex-col font-sans selection:bg-[#FC800A] selection:text-white">
-      
+
       {/* 1. Main Sticky Navigation (Clean & animated without top contact bar) */}
       <Header onOpenTrialModal={() => setTrialModalOpen(true)} />
 
       {/* Main Content Sections (Strictly mapped 1-to-1 to reference template: A for Apple) */}
       <main className="flex-1">
-        
+
         {/* Section 1 (Template Sec 7): Hero Carousel with Rotating Dashed Rings & Floating Badges */}
-        <HeroCarousel 
+        <HeroCarousel
           onOpenTrialModal={() => setTrialModalOpen(true)}
           onOpenVideoModal={() => setVideoModalOpen(true)}
         />
 
         {/* Section 2 (Template Sec 8): About Us & Globally Recognized Interactive Preschool Education */}
-        <AboutSection 
+        <AboutSection
           onOpenVideoModal={() => setVideoModalOpen(true)}
           onOpenMenuModal={() => setMenuModalOpen(true)}
           onOpenTrialModal={() => setTrialModalOpen(true)}
@@ -60,24 +58,17 @@ export default function App() {
 
         {/* Section 7 (Template Sec 13): Loved By Kids & Join Today & Become Confident Learner */}
         <AdmissionSteps onOpenTrialModal={() => setTrialModalOpen(true)} />
-
-        {/* Section 8 (Template Sec 14): Photo Gallery & Ideal Kids Special Events */}
-        <EventsSection onOpenTrialModal={() => setTrialModalOpen(true)} />
-
         {/* Section 9 (Template Sec 15): Education Solution & Learn & Enjoy Together */}
         <CampusGallery onOpenTrialModal={() => setTrialModalOpen(true)} />
 
         {/* Section 10 (Template Sec 16): Testimonial & What Parents Say */}
         <TestimonialsSection />
 
-        {/* Section 11 (Template Sec 18): What We Do & Sign Up Now For Your 15% OFF */}
-        <PromoCtaBanner onOpenTrialModal={() => setTrialModalOpen(true)} />
-
       </main>
 
       {/* Section 12 (Template Sec 19-22): Signature Cloud Separator Footer & Newsletter */}
-      <Footer 
-        onOpenTrialModal={() => setTrialModalOpen(true)} 
+      <Footer
+        onOpenTrialModal={() => setTrialModalOpen(true)}
         onOpenMenuModal={() => setMenuModalOpen(true)}
       />
 
@@ -85,24 +76,24 @@ export default function App() {
       <FloatingActions />
 
       {/* Interactive Modals */}
-      <TrialModal 
-        isOpen={trialModalOpen} 
-        onClose={() => setTrialModalOpen(false)} 
+      <TrialModal
+        isOpen={trialModalOpen}
+        onClose={() => setTrialModalOpen(false)}
       />
 
-      <WeeklyMenuModal 
-        isOpen={menuModalOpen} 
-        onClose={() => setMenuModalOpen(false)} 
+      <WeeklyMenuModal
+        isOpen={menuModalOpen}
+        onClose={() => setMenuModalOpen(false)}
       />
 
-      <SearchModal 
-        isOpen={searchModalOpen} 
-        onClose={() => setSearchModalOpen(false)} 
+      <SearchModal
+        isOpen={searchModalOpen}
+        onClose={() => setSearchModalOpen(false)}
       />
 
-      <VideoModal 
-        isOpen={videoModalOpen} 
-        onClose={() => setVideoModalOpen(false)} 
+      <VideoModal
+        isOpen={videoModalOpen}
+        onClose={() => setVideoModalOpen(false)}
       />
 
     </div>

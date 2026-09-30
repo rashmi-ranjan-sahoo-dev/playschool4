@@ -12,10 +12,19 @@
     --color-sky: #4EC5F1;
   }
 
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
   body {
     font-family: 'Inter', sans-serif;
     background-color: var(--color-cream);
     color: #1a1a1a;
+    overflow-x: hidden;
+    max-width: 100vw;
+    position: relative;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -240,4 +249,28 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #e06c00;
+}
+
+/* Admission Steps Rocket & Dashed Curve Animation */
+@keyframes rocketBob {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(3deg);
+  }
+}
+
+.animate-rocket {
+  animation: rocketBob 4.5s ease-in-out infinite;
+}
+
+@keyframes dashFlow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+.animate-dash-flow {
+  animation: dashFlow 1.8s linear infinite;
 }

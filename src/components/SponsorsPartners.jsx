@@ -12,7 +12,7 @@ export default function SponsorsPartners() {
   ];
 
   return (
-    <section className="py-12 bg-white/70 border-y border-orange-200/80">
+    <section className="pt-6 md:pt-8 pb-12 bg-white/70 border-y border-orange-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Subtle Header */}

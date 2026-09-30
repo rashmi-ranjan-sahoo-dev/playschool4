@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, X, ArrowRight, BookOpen, Calendar, MapPin } from 'lucide-react';
 import { brandConfig } from '../config/brandConfig';
 
 export default function SearchModal({ isOpen, onClose, onSelectProgram }) {
   const [searchTerm, setSearchTerm] = useState('');
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -24,7 +33,10 @@ export default function SearchModal({ isOpen, onClose, onSelectProgram }) {
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 p-4 bg-black/60 backdrop-blur-xs animate-fadeIn">
+    <div 
+      className="fixed inset-0 z-50 flex items-start justify-center pt-20 p-4 bg-black/60 backdrop-blur-xs animate-fadeIn"
+      onClick={onClose}
+    >
       <div 
         className="bg-[#FCF7EE] rounded-3xl border-4 border-[#171E45] shadow-2xl max-w-xl w-full overflow-hidden relative card-playful-shadow"
         onClick={(e) => e.stopPropagation()}

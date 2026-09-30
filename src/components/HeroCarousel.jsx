@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroCarousel({ onOpenTrialModal }) {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -8,6 +11,7 @@ export default function HeroCarousel({ onOpenTrialModal }) {
   const photoCardRef = useRef(null);
   const girlRef = useRef(null);
   const blobRef = useRef(null);
+  const floatingDecorRef = useRef(null);
 
   // Exact slides based on the reference template
   const slides = [
@@ -39,42 +43,57 @@ export default function HeroCarousel({ onOpenTrialModal }) {
 
   const isInitialMount = useRef(true);
 
-  // 1. Initial entrance animations on page load only (runs ONCE on mount)
+  // 1. Initial entrance & ScrollTrigger animations (smooth & slow)
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Girl entrance from bottom on load
       gsap.fromTo(
         girlRef.current,
-        { opacity: 0, y: 35, scale: 0.96 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'back.out(1.4)' }
+        { opacity: 0, y: 40, scale: 0.95 },
+        { opacity: 1, y: 0, scale: 1, duration: 1.1, ease: 'power3.out' }
       );
 
       // Levitating photo card entrance from top-right on load
       gsap.fromTo(
         photoCardRef.current,
-        { opacity: 0, y: -30, scale: 0.85 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.9, delay: 0.15, ease: 'back.out(1.6)' }
+        { opacity: 0, y: -35, scale: 0.85 },
+        { opacity: 1, y: 0, scale: 1, duration: 1.2, delay: 0.15, ease: 'back.out(1.5)' }
       );
 
       // Background orange blob entrance on load
       gsap.fromTo(
         blobRef.current,
         { opacity: 0, scale: 0.8 },
-        { opacity: 0.95, scale: 1, duration: 0.8, ease: 'power2.out' }
+        { opacity: 0.95, scale: 1, duration: 1.1, ease: 'power2.out' }
       );
 
       // Initial text reveal
       gsap.fromTo(
         textContainerRef.current,
         { opacity: 0, x: 30 },
-        { opacity: 1, x: 0, duration: 0.7, ease: 'power2.out' }
+        { opacity: 1, x: 0, duration: 1.0, ease: 'power2.out' }
       );
+
+      // ScrollTrigger gentle parallax drift for hero section
+      if (floatingDecorRef.current) {
+        gsap.to(floatingDecorRef.current.children, {
+          y: -25,
+          stagger: 0.05,
+          ease: "none",
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: 1.5,
+          }
+        });
+      }
     }, heroRef);
 
     return () => ctx.revert();
   }, []);
 
-  // 2. ONLY smoothly transition the text content when user clicks arrow buttons (images are NEVER re-animated or jittered!)
+  // 2. ONLY smoothly transition the text content when user clicks arrow buttons
   useEffect(() => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
@@ -85,7 +104,7 @@ export default function HeroCarousel({ onOpenTrialModal }) {
       gsap.fromTo(
         textContainerRef.current,
         { opacity: 0, x: 25 },
-        { opacity: 1, x: 0, duration: 0.45, ease: 'power2.out' }
+        { opacity: 1, x: 0, duration: 0.55, ease: 'power2.out' }
       );
     }
   }, [currentSlide]);
@@ -104,7 +123,7 @@ export default function HeroCarousel({ onOpenTrialModal }) {
     <section 
       id="hero" 
       ref={heroRef}
-      className="relative overflow-hidden bg-[#FAF4EA] pt-0 pb-10 sm:pb-14 lg:pb-16 border-b border-orange-200/40 select-none"
+      className="relative overflow-hidden bg-[#FAF4EA] pt-0 pb-6 sm:pb-8 lg:pb-10 border-b border-orange-200/40 select-none"
     >
       {/* 1. Signature Scalloped White Cloud Top Border (1-to-1 match with Reference Screenshot) */}
       <div className="w-full overflow-hidden leading-none z-10 pointer-events-none -mt-0.5">
@@ -114,42 +133,43 @@ export default function HeroCarousel({ onOpenTrialModal }) {
       </div>
 
       {/* 2. Floating Whimsical Stickers & Confetti (Authentic Assets from Reference) */}
-      
-      {/* Top Center: Floating Scissors Doodle (Positioned in high clouds, never overlapping text) */}
-      <div className="absolute top-3 sm:top-5 left-[44%] -translate-x-1/2 z-20 pointer-events-none animate-float-delayed hidden lg:block">
-        <img 
-          src="/images/scissors.webp" 
-          alt="Floating scissors doodle" 
-          className="w-14 lg:w-16 h-auto drop-shadow-sm -rotate-12 opacity-90" 
-        />
-      </div>
+      <div ref={floatingDecorRef} className="pointer-events-none">
+        {/* Top Center: Floating Scissors Doodle (Positioned in high clouds, never overlapping text) */}
+        <div className="absolute top-3 sm:top-5 left-[44%] -translate-x-1/2 z-20 pointer-events-none animate-float-delayed hidden lg:block">
+          <img 
+            src="/images/scissors.webp" 
+            alt="Floating scissors doodle" 
+            className="w-14 lg:w-16 h-auto drop-shadow-sm -rotate-12 opacity-90" 
+          />
+        </div>
 
-      {/* Bottom Center-Left: Whimsical Mint & Coral Student Backpack (Under girl elbow, never behind arrows) */}
-      <div className="absolute bottom-4 left-[24%] lg:left-[28%] z-20 pointer-events-none animate-float hidden lg:block">
-        <img 
-          src="/images/backpack.webp" 
-          alt="Floating student backpack" 
-          className="w-20 lg:w-24 h-auto drop-shadow-md opacity-90" 
-        />
-      </div>
+        {/* Bottom Center-Left: Whimsical Mint & Coral Student Backpack (Under girl elbow, never behind arrows) */}
+        <div className="absolute bottom-4 left-[24%] lg:left-[28%] z-20 pointer-events-none animate-float hidden lg:block">
+          <img 
+            src="/images/backpack.webp" 
+            alt="Floating student backpack" 
+            className="w-20 lg:w-24 h-auto drop-shadow-md opacity-90" 
+          />
+        </div>
 
-      {/* Bottom Right: Wooden Triangular ABC Scale Ruler */}
-      <div className="absolute bottom-4 right-4 sm:right-10 md:right-14 z-20 pointer-events-none animate-float-delayed hidden md:block">
-        <img 
-          src="/images/abc-scale.webp" 
-          alt="Floating ABC scale ruler" 
-          className="w-24 sm:w-28 md:w-32 h-auto drop-shadow-sm opacity-90" 
-        />
-      </div>
+        {/* Bottom Right: Wooden Triangular ABC Scale Ruler */}
+        <div className="absolute bottom-4 right-4 sm:right-10 md:right-14 z-20 pointer-events-none animate-float-delayed hidden md:block">
+          <img 
+            src="/images/abc-scale.webp" 
+            alt="Floating ABC scale ruler" 
+            className="w-24 sm:w-28 md:w-32 h-auto drop-shadow-sm opacity-90" 
+          />
+        </div>
 
-      {/* Scattered Pastel Confetti Dots (Positioned in open margins) */}
-      <div className="absolute top-24 left-6 sm:left-10 w-3 h-3 rounded-full bg-[#FC800A] opacity-75 pointer-events-none"></div>
-      <div className="absolute top-36 left-4 sm:left-8 text-[#FAB823] opacity-80 text-2xl font-black pointer-events-none select-none animate-twinkle">✦</div>
-      <div className="absolute top-48 left-6 sm:left-10 text-[#4EC5F1] opacity-60 text-2xl pointer-events-none select-none">✳</div>
-      
-      <div className="absolute top-20 right-[12%] w-3 h-3 rounded-full bg-[#FAB823] opacity-75 pointer-events-none hidden md:block"></div>
-      <div className="absolute top-32 right-[8%] text-[#F96EA0] opacity-60 text-3xl font-black pointer-events-none select-none animate-twinkle hidden md:block">✳</div>
-      <div className="absolute top-28 right-[4%] w-3.5 h-3.5 rounded-full bg-[#FC800A] opacity-80 pointer-events-none hidden md:block"></div>
+        {/* Scattered Pastel Confetti Dots (Positioned in open margins) */}
+        <div className="absolute top-24 left-6 sm:left-10 w-3 h-3 rounded-full bg-[#FC800A] opacity-75 pointer-events-none"></div>
+        <div className="absolute top-36 left-4 sm:left-8 text-[#FAB823] opacity-80 text-2xl font-black pointer-events-none select-none animate-twinkle">✦</div>
+        <div className="absolute top-48 left-6 sm:left-10 text-[#4EC5F1] opacity-60 text-2xl pointer-events-none select-none">✳</div>
+        
+        <div className="absolute top-20 right-[12%] w-3 h-3 rounded-full bg-[#FAB823] opacity-75 pointer-events-none hidden md:block"></div>
+        <div className="absolute top-32 right-[8%] text-[#F96EA0] opacity-60 text-3xl font-black pointer-events-none select-none animate-twinkle hidden md:block">✳</div>
+        <div className="absolute top-28 right-[4%] w-3.5 h-3.5 rounded-full bg-[#FC800A] opacity-80 pointer-events-none hidden md:block"></div>
+      </div>
 
       {/* 3. Main Hero Two-Column Layout */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 sm:pt-4 relative z-10">
@@ -158,7 +178,7 @@ export default function HeroCarousel({ onOpenTrialModal }) {
           {/* ================= LEFT COLUMN: Authentic Indian Girl + Levitating Photo Card ================= */}
           <div className="lg:col-span-6 relative flex justify-center lg:justify-start items-end max-w-full">
             
-            <div className="relative w-full max-w-[320px] xs:max-w-[360px] sm:max-w-[420px] md:max-w-[460px] lg:max-w-[500px] xl:max-w-[540px] flex items-end justify-center">
+            <div className="relative w-full max-w-[280px] xs:max-w-[320px] sm:max-w-[420px] md:max-w-[460px] lg:max-w-[500px] xl:max-w-[540px] flex items-end justify-center">
               {/* Background Organic Orange Blob Shape */}
               <div 
                 ref={blobRef}
@@ -209,7 +229,7 @@ export default function HeroCarousel({ onOpenTrialModal }) {
           </div>
 
           {/* ================= RIGHT COLUMN: Plain Orange Subtitle, Headline + Star, Paragraph, CTA & Doodle Arrows ================= */}
-          <div className="lg:col-span-6 space-y-4 sm:space-y-6 pb-6 sm:pb-8 lg:pb-12 text-left" ref={textContainerRef}>
+          <div className="lg:col-span-6 space-y-4 sm:space-y-6 pb-2 sm:pb-4 lg:pb-6 text-left" ref={textContainerRef}>
             
             {/* 1. Subtitle: Clean Orange Text (NO BLUE BOX - Exactly matches reference screenshot!) */}
             <div>
@@ -220,7 +240,7 @@ export default function HeroCarousel({ onOpenTrialModal }) {
 
             {/* 2. Headline: Bold Black/Navy Text + Cute Yellow Star */}
             <h1 className="font-rowdies text-3xl sm:text-4xl md:text-[44px] lg:text-[46px] xl:text-[52px] font-bold text-[#171E45] leading-[1.14] tracking-tight">
-              <span className="inline-flex items-center whitespace-nowrap">
+              <span className="inline-flex flex-wrap items-center">
                 <span>{active.headlineLine1}</span>
                 {active.hasStar && (
                   <span className="text-[#FAB823] ml-2 inline-block select-none animate-twinkle text-2xl sm:text-3xl lg:text-4xl align-middle">

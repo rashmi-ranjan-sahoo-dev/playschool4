@@ -12,7 +12,7 @@ export default function StatsCounter() {
   ];
 
   return (
-    <section className="py-12 bg-[#171E45] text-white relative overflow-hidden">
+    <section className="pt-6 md:pt-8 pb-12 bg-[#171E45] text-white relative overflow-hidden">
       {/* Decorative stars */}
       <div className="absolute top-2 left-6 text-xl text-yellow-300 opacity-60">✨</div>
       <div className="absolute bottom-2 right-8 text-xl text-yellow-300 opacity-60">⭐</div>

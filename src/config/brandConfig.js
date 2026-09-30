@@ -91,75 +91,78 @@ export const brandConfig = {
   programs: [
     {
       id: "playgroup",
-      title: "Playgroup (Nanhe Kadam)",
-      age: "1.5 to 2.5 Years",
-      timing: "9:00 AM - 11:30 AM",
+      title: "Playgroup",
+      hindiName: "नन्हे कदम",
+      age: "1.5 – 2.5 Yrs",
+      timing: "9:00 – 11:30 AM",
       badgeColor: "bg-[#FC800A]",
       textColor: "text-[#FC800A]",
-      description: "Sensory stimulation, gross motor play, musical rhymes, and gentle separation from parents through joy.",
-      highlights: ["Tactile & sensory discovery", "Social sharing & circle time", "Potty training assistance", "Gross & fine motor skills"],
-      fees: "₹4,500 / month",
-      image: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=700&q=80"
+      borderColor: "border-[#FC800A]",
+      lightBg: "bg-orange-50/70",
+      description: "Joyful sensory play, motor development, musical rhymes & gentle first social steps.",
+      tags: ["Sensory Play", "Rhymes & Joy"],
+      fees: "₹4,500/mo",
+      image: "/images/programs/playgroup.jpg"
     },
     {
       id: "nursery",
-      title: "Nursery (Umang)",
-      age: "2.5 to 3.5 Years",
-      timing: "9:00 AM - 12:30 PM",
+      title: "Nursery",
+      hindiName: "उमंग",
+      age: "2.5 – 3.5 Yrs",
+      timing: "9:00 AM – 12:30 PM",
       badgeColor: "bg-[#5AAD65]",
       textColor: "text-[#5AAD65]",
-      description: "Laying strong foundations with Jolly Phonics, pre-math, Hindi rhymes, nature walks, and creative drama.",
-      highlights: ["Phonics letter sounds", "Number recognition 1-20", "Panchatantra moral stories", "Montessori practical life"],
-      fees: "₹5,200 / month",
-      image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=700&q=80"
+      borderColor: "border-[#5AAD65]",
+      lightBg: "bg-emerald-50/70",
+      description: "Jolly phonics, pre-math concepts, Hindi kavita, finger painting & nature curiosity.",
+      tags: ["Jolly Phonics", "Art & Stories"],
+      fees: "₹5,200/mo",
+      image: "/images/programs/nursery.jpg"
     },
     {
       id: "junior-kg",
-      title: "Junior KG / LKG (Tarang)",
-      age: "3.5 to 4.5 Years",
-      timing: "8:45 AM - 1:00 PM",
+      title: "Junior KG / LKG",
+      hindiName: "तरंग",
+      age: "3.5 – 4.5 Yrs",
+      timing: "8:45 AM – 1:00 PM",
       badgeColor: "bg-[#FAB823]",
-      textColor: "text-[#FAB823]",
-      description: "Fostering sentence formation, early arithmetic, environmental science, curiosity, and team sports.",
-      highlights: ["Reading sight words", "Basic additions & shapes", "Environmental awareness", "Yoga & mindful breathing"],
-      fees: "₹5,800 / month",
-      image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=700&q=80"
+      textColor: "text-[#D99000]",
+      borderColor: "border-[#FAB823]",
+      lightBg: "bg-amber-50/70",
+      description: "Word building, early mathematics, STEM puzzles, Indian moral tales & mindful yoga.",
+      tags: ["Early Math", "Panchatantra"],
+      fees: "₹5,800/mo",
+      image: "/images/programs/juniorkg.jpg"
     },
     {
       id: "senior-kg",
-      title: "Senior KG / UKG (Udaan)",
-      age: "4.5 to 5.5 Years",
-      timing: "8:45 AM - 1:30 PM",
+      title: "Senior KG / UKG",
+      hindiName: "उड़ान",
+      age: "4.5 – 5.5 Yrs",
+      timing: "8:45 AM – 1:30 PM",
       badgeColor: "bg-[#F96EA0]",
-      textColor: "text-[#F96EA0]",
-      description: "Primary school readiness: English fluency, cursive writing, Hindi Swar-Vyanjan, STEM projects, and public speaking.",
-      highlights: ["Primary school transition", "Logical reasoning & STEM", "Hindi varnamala & speaking", "Stage confidence & debates"],
-      fees: "₹6,400 / month",
-      image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=700&q=80"
+      textColor: "text-[#E11D48]",
+      borderColor: "border-[#F96EA0]",
+      lightBg: "bg-pink-50/70",
+      description: "Primary school readiness, Hindi Swar-Vyanjan, reading fluency & stage confidence.",
+      tags: ["School Ready", "Confidence"],
+      fees: "₹6,400/mo",
+      image: "/images/programs/seniorkg.jpg"
     },
     {
       id: "daycare",
-      title: "Daycare & Infant Care (Suraksha)",
-      age: "6 Months to 10 Years",
-      timing: "8:00 AM - 7:00 PM",
+      title: "Daycare & Creche",
+      hindiName: "सुरक्षा",
+      age: "6 Mo – 10 Yrs",
+      timing: "8:00 AM – 7:00 PM",
       badgeColor: "bg-[#171E45]",
       textColor: "text-[#171E45]",
-      description: "A home away from home with CCTV access, hot sattvic nutritious meals, homework support, and cozy nap rooms.",
-      highlights: ["Fresh home-style meals", "Loving Aaya Didi care", "Homework assistance", "Live parent streaming"],
-      fees: "₹7,500 / month",
-      image: "https://images.unsplash.com/photo-1567057420215-1d94f2b96053?auto=format&fit=crop&w=700&q=80"
-    },
-    {
-      id: "activity-club",
-      title: "After-School Enrichment Club",
-      age: "3 to 12 Years",
-      timing: "3:30 PM - 6:00 PM",
-      badgeColor: "bg-[#4EC5F1]",
-      textColor: "text-[#4EC5F1]",
-      description: "Vedic Math, Abacus, Classical Dance, Karate, Robotics for kids, and Shloka chanting.",
-      highlights: ["Abacus & mental math", "Kathak & Bollywood beats", "Junior robotics tinkering", "Speech & drama guild"],
-      fees: "₹3,200 / month",
-      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=700&q=80"
+      borderColor: "border-[#171E45]",
+      lightBg: "bg-slate-50/70",
+      description: "Warm motherly care, live CCTV, hot sattvic nutritious meals, quiet nap zones & homework help.",
+      tags: ["Live CCTV", "Hot Meals"],
+      fees: "₹7,500/mo",
+      image: "/images/programs/daycare.jpg"
     }
   ],
 
@@ -235,50 +238,72 @@ export const brandConfig = {
     }
   ],
 
-  // Indian Parent Testimonials
+  // Authentic Indian Parent Testimonials
   testimonials: [
     {
       id: 1,
-      quote: "Sending our 2-year old Vihaan to Aarambh was the best decision! The live CCTV on the mobile app gives us total peace of mind while working. He now recites Gayatri Mantra and English phonics with equal ease!",
-      parentName: "Dr. Ananya & Rohit Deshmukh",
-      childDetail: "Parents of Vihaan (Playgroup - Noida Campus)",
+      quote: "Sending Vihaan here was our best decision! Live CCTV on the app gives us total peace of mind while working. He chants shlokas and rhymes with pure joy!",
+      parentName: "Dr. Priya Deshmukh",
+      childDetail: "Mother of Vihaan (Playgroup • Noida)",
       rating: 5,
-      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80"
+      avatar: "/images/testimonials/parent_1.jpg",
+      tag: "CCTV & Security"
     },
     {
       id: 2,
-      quote: "What impressed us most is the clean sattvic meal plan and the motherly care of the teachers. The van service with Didi is punctual and completely secure. Aarambh feels like our extended family.",
-      parentName: "Sneha & Arvind Kulkarni",
-      childDetail: "Parents of Ananya (Nursery - Bengaluru Campus)",
+      quote: "What won us over is the wholesome sattvic food and caring Didis. Kabir's speech and confidence blossomed within just 3 months. Truly our extended family!",
+      parentName: "Arvind Kulkarni",
+      childDetail: "Father of Kabir (Nursery • Bengaluru)",
       rating: 5,
-      avatar: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?auto=format&fit=crop&w=200&q=80"
+      avatar: "/images/testimonials/parent_dad_1.jpg",
+      tag: "Nutrition & Care"
     },
     {
       id: 3,
-      quote: "The NEP 2020 hands-on methodology here is phenomenal. My daughter Aadhya used to be shy, but within 6 months she was anchoring the Annual Day celebration. Truly grateful to the mentors!",
-      parentName: "Meenakshi & Vikramaditya Sharma",
-      childDetail: "Parents of Aadhya (Senior KG - Delhi NCR)",
+      quote: "From a hesitant toddler to hosting the Annual Stage Day! The NEP 2020 hands-on play approach and patient educators have worked wonders for Aadhya.",
+      parentName: "Meenakshi Sharma",
+      childDetail: "Mother of Aadhya (Senior KG • Delhi NCR)",
       rating: 5,
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
+      avatar: "/images/testimonials/parent_4.jpg",
+      tag: "Holistic Growth"
     },
     {
       id: 4,
-      quote: "Daycare facility is spotless. The homework support and evening snacks are so wholesome. I never have to worry about my twins during my long hospital shifts. 10/10 recommended for working parents.",
-      parentName: "Pooja & Harish Nair",
-      childDetail: "Parents of Kabir & Reyansh (Daycare - Pune)",
+      quote: "Zero screen time, vibrant cultural festivals, and warm teachers. Ishani runs to her school van every morning with a cheerful smile!",
+      parentName: "Sneha Iyer",
+      childDetail: "Mother of Ishani (Junior KG • Pune)",
       rating: 5,
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80"
+      avatar: "/images/testimonials/parent_3.jpg",
+      tag: "Joyful Learning"
+    },
+    {
+      id: 5,
+      quote: "The daycare is spotless with timely homework guidance. As working parents, daily live updates and loving care are an absolute blessing for us.",
+      parentName: "Dr. Rohit Nair",
+      childDetail: "Father of Reyansh (Daycare • Gurugram)",
+      rating: 5,
+      avatar: "/images/testimonials/parent_dad_2.jpg",
+      tag: "Daycare Support"
+    },
+    {
+      id: 6,
+      quote: "The motherly warmth of every educator here is remarkable. Diya learned sharing, phonics, and clay art without any pressure. Aarambh is simply the best!",
+      parentName: "Pooja Verma",
+      childDetail: "Mother of Diya (Toddler Club • Mumbai)",
+      rating: 5,
+      avatar: "/images/testimonials/parent_6.jpg",
+      tag: "Motherly Care"
     }
   ],
 
-  // Gallery Categories & Images
+  // Gallery Images (Authentic Indian Playschool)
   gallery: [
-    { title: "Montessori Activity Lab", category: "Classrooms", image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=700&q=80" },
-    { title: "Sensory Splash Pool & Sand Pit", category: "Outdoors", image: "https://images.unsplash.com/photo-1567057420215-1d94f2b96053?auto=format&fit=crop&w=700&q=80" },
-    { title: "Bal-Gopal Festive Celebration", category: "Events", image: "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?auto=format&fit=crop&w=700&q=80" },
-    { title: "Morning Yoga & Meditation Circle", category: "Wellness", image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=700&q=80" },
-    { title: "Creative Pottery & Folk Art", category: "Art & Craft", image: "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=700&q=80" },
-    { title: "Story Corner & Phonics Library", category: "Library", image: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=700&q=80" }
+    { id: 1, image: "/images/gallery/gallery_1.jpg", alt: "Creative pottery & clay art in Indian preschool" },
+    { id: 2, image: "/images/gallery/gallery_2.jpg", alt: "Morning yoga & prayer circle in Indian playschool" },
+    { id: 3, image: "/images/gallery/gallery_3.jpg", alt: "Outdoor playground slide & lush lawn fun" },
+    { id: 4, image: "/images/gallery/gallery_4.jpg", alt: "Festive celebration with flower rangoli" },
+    { id: 5, image: "/images/gallery/gallery_5.jpg", alt: "Story reading corner with caring teacher" },
+    { id: 6, image: "/images/gallery/gallery_6.jpg", alt: "Montessori building blocks & sensory lab" }
   ],
 
   // Daily Nutritious Sattvic Snack Menu (Parents love seeing this!)
